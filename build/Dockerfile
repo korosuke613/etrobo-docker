@@ -35,5 +35,3 @@ RUN rm -rf hrp2/sdk/workspace/
 # workspaceのコピー
 RUN git clone https://github.com/korosuke613/etrobocon2017.git hrp2/sdk/workspace
 
-# ボリュームの指定
-VOLUME hrp2/sdk/workspace
