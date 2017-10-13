@@ -4,6 +4,9 @@ FROM ubuntu
 # 作者の指定
 MAINTAINER Futa HIRAKOBA
 
+# ボリュームの指定
+VOLUME ~/etrobo/hrp2/sdk/workspace
+
 # アップデート
 RUN apt-get update -y
 RUN apt-get install git -y
