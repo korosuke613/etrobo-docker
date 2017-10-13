@@ -1,5 +1,5 @@
 # FROM でベースとなるイメージを指定
-FROM  korosuke613/all-in-ubuntu
+FROM  docker.io/korosuke613/all-in-ubuntu
 
 # 作者の指定
 MAINTAINER Futa HIRAKOBA
