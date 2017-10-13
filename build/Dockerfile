@@ -4,9 +4,6 @@ FROM ubuntu
 # 作者の指定
 MAINTAINER Futa HIRAKOBA
 
-# ボリュームの指定
-VOLUME ~/etrobo/hrp2/sdk/workspace
-
 # アップデート
 RUN apt-get update -y
 RUN apt-get install git -y
@@ -37,3 +34,6 @@ RUN rm -rf hrp2/sdk/workspace/
 
 # workspaceのコピー
 RUN git clone https://github.com/korosuke613/etrobocon2017.git hrp2/sdk/workspace
+
+# ボリュームの指定
+VOLUME hrp2/sdk/workspace
