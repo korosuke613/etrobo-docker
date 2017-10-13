@@ -19,13 +19,13 @@ RUN apt-get install g++ -y
 
 # 作業ディレクトリの指定
 RUN mkdir ~/workspace
+RUN cd ~/workspace
 WORKDIR ~/workspace
 
 # リポジトリのクローン
 RUN git clone https://github.com/korosuke613/ETrobo-Docker.git
 
 # hrp2の解凍
-RUN cd ~/workspace
 RUN tar Jxvf hrp2.tar.xz
 RUN rm -f hrp2.tar.xz
 
