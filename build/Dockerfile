@@ -21,13 +21,17 @@ RUN apt-get install g++ -y
 RUN git clone https://github.com/korosuke613/ETrobo-Docker.git ~/etrobo
 
 # hrp2の解凍
-RUN cd ~/etrobo && tar Jxvf ~/etrobo/hrp2.tar.xz && rm -f ~/etrobo/hrp2.tar.xz
+WORKDIR ~/etrobo
+RUN tar Jxvf hrp2.tar.xz 
+RUN rm -f hrp2.tar.xz
 
 # cfgのmake
-RUN cd ~/etrobo/hrp2/cfg && make && cd ~/etrobo
+WORKDIR ~/etrobo/hrp2/cfg 
+RUN make
+WORKDIR ~/etrobo
 
 # workspaceの削除
 RUN rm -rf hrp2/sdk/workspace/
 
 # workspaceのコピー
-RUN git clone https://github.com/korosuke613/etrobocon2017.git ~/etrobo/hrp2/sdk/workspace
+RUN git clone https://github.com/korosuke613/etrobocon2017.git hrp2/sdk/workspace
