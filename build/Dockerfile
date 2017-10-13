@@ -17,25 +17,21 @@ RUN apt-get install gcc-arm-none-eabi u-boot-tools libboost1.58-all-dev -y
 RUN apt-get install make -y
 RUN apt-get install g++ -y
 
-# 作業ディレクトリの指定
-RUN mkdir ~/workspace
-RUN cd ~/workspace
-WORKDIR ~/workspace
-
 # リポジトリのクローン
-RUN git clone https://github.com/korosuke613/ETrobo-Docker.git
+RUN git clone https://github.com/korosuke613/ETrobo-Docker.git ~/etrobo
+RUN cd ~/etrobo
 
 # hrp2の解凍
 RUN tar Jxvf hrp2.tar.xz
 RUN rm -f hrp2.tar.xz
 
 # cfgのmake
-RUN cd hrp2/cfg
+RUN cd ~/etrobo/hrp2/cfg
 RUN make
-RUN cd ~/workspace
+RUN cd ~/etrobo
 
 # workspaceの削除
 RUN rm -rf hrp2/sdk/workspace/
 
 # workspaceのコピー
-RUN git clone https://github.com/korosuke613/etrobocon2017.git hrp2/sdk/workspace
+RUN git clone https://github.com/korosuke613/etrobocon2017.git ~/etrobo/hrp2/sdk/workspace
