@@ -27,11 +27,11 @@ RUN cd ~/etrobo && tar Jxvf hrp2.tar.xz && rm -f hrp2.tar.xz
 # cfgのmake
 WORKDIR ~/etrobo/hrp2/cfg 
 RUN cd ~/etrobo/hrp2/cfg && make
-WORKDIR ~/etrobo
+WORKDIR ~/etrobo/hrp2/sdk
 
 # workspaceの削除
 RUN rm -rf hrp2/sdk/workspace/
 
 # workspaceのコピー
-RUN git clone https://github.com/korosuke613/etrobocon2017.git hrp2/sdk/workspace
+RUN git clone https://github.com/korosuke613/etrobocon2017.git workspace
 
