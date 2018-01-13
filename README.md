@@ -14,7 +14,8 @@ $ docker run -v /some/src/:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docke
 ```
 
 ビルドがうまく行った場合、`/some/src`に`app`というEV3RT向けの実行ファイルが生成されている。
-ちなみに、相対パスを指定したい場合、`$PWD`を利用する。
+
+ちなみに、相対パスを指定したい場合、`$PWD`を利用すると楽。
 
 ```
 $ cd /some/src/
