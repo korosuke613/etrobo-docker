@@ -1,6 +1,8 @@
 # ETrobo-Docker
 TOPPERS/EV3RTのビルド環境をラッピングしたUbuntuベースのDocker Image
 
+OS : Ubuntu 16.04.3
+Imageのサイズ : 約1.8GB
 
 ## 使用例
 `app.cfg`の存在するディレクトリ(`/some/src/`とする)に移動してから、次のコマンドを実行する。
@@ -21,7 +23,7 @@ $ docker run -v $PWD:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
 以下のコマンドを実行する
 
 ```
-$ git clone https://github.com/korosuke613/ETrobo-Docker.git
+$ git clone --recursive --depth=1 https://github.com/korosuke613/ETrobo-Docker.git
 $ cd ETrobo-Docker/sample/src
 $ docker run -v $PWD:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
 ```
