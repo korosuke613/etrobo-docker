@@ -1,20 +1,26 @@
 # FROM でベースとなるイメージを指定
-FROM  docker.io/korosuke613/all-in-ubuntu
+FROM  korosuke613/all-in-ubuntu
 
 # 作者の指定
 MAINTAINER Futa HIRAKOBA
 
-# リポジトリのクローン
-RUN git clone https://github.com/korosuke613/ETrobo-Docker.git ~/etrobo
+WORKDIR /home/root/
+
+RUN mkdir tmp
+
+WORKDIR tmp
+RUN wget http://www.toppers.jp/download.cgi/ev3rt-beta7-release.zip
+
+
+RUN unzip ev3rt-beta7-release.zip
 
 # hrp2の解凍
-WORKDIR ~/etrobo
-RUN cd ~/etrobo && tar Jxvf hrp2.tar.xz && rm -f hrp2.tar.xz
+RUN tar Jxvf ev3rt-beta7-release/hrp2.tar.xz
+RUN mv hrp2 /home/root/
 
 # cfgのmake
-WORKDIR ~/etrobo/hrp2/cfg 
-RUN cd ~/etrobo/hrp2/cfg && make
-WORKDIR ~/etrobo/hrp2/sdk
+WORKDIR /home/root/hrp2/cfg
+RUN make
+RUN rm -rf /home/root/tmp
+WORKDIR /home/root/hrp2/sdk/workspace
 
-# workspaceの削除
-RUN rm -rf hrp2/sdk/workspace/
