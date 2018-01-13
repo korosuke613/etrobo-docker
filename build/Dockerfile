@@ -1,31 +1,32 @@
-# FROM でベースとなるイメージを指定
+# 必要ライブラリがインストール済のubuntu
 FROM  korosuke613/all-in-ubuntu
-
-# 作者の指定
 MAINTAINER Futa HIRAKOBA
 
-WORKDIR /home/root/
-
+# 作業用フォルダの作成
+WORKDIR /home/
 RUN mkdir tmp
+WORKDIR /home/tmp
 
-WORKDIR tmp
+# ToppersからMakefileをダウンロード、解凍
 RUN wget http://www.toppers.jp/download.cgi/ev3rt-beta7-release.zip
-
-
 RUN unzip ev3rt-beta7-release.zip
 
-# hrp2の解凍
+# hrp2の解凍、移動
 RUN tar Jxvf ev3rt-beta7-release/hrp2.tar.xz
-RUN mv hrp2 /home/root/
+RUN mv hrp2 /home/
 
-# cfgのmake
-WORKDIR /home/root/hrp2/cfg
+# cfgをmake
+WORKDIR /home/hrp2/cfg
 RUN make
-RUN rm -rf /home/root/tmp
 
-ADD make_src.sh /home/root/hrp2/sdk/workspace 
+# 作業用ディレクトリの削除
+RUN rm -rf /home/tmp
 
-WORKDIR /home/root/hrp2/sdk/workspace
+# makeのラッパースクリプトを追加
+ADD make_src.sh /home/hrp2/sdk/workspace 
+
+# make_src.shを使用可能に
+WORKDIR /home/hrp2/sdk/workspace
 RUN chmod 755 make_src.sh
-CMD /home/root/hrp2/sdk/workspace/make_src.sh
+CMD /home/hrp2/sdk/workspace/make_src.sh
 
