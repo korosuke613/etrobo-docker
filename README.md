@@ -1,8 +1,10 @@
 # ETrobo-Docker
+[![Docker Automated build](https://img.shields.io/docker/automated/korosuke613/etrobo-docker.svg?style=flat-square)](https://hub.docker.com/r/korosuke613/etrobo-docker/)
+
 TOPPERS/EV3RTのビルド環境をラッピングしたUbuntuベースのDocker Image
 
-OS : Ubuntu 16.04.3
-Imageのサイズ : 約1.8GB
+* OS : Ubuntu 16.04.3
+* Imageのサイズ : 約1.8GB
 
 ## 使用例
 `app.cfg`の存在するディレクトリ(`/some/src/`とする)に移動してから、次のコマンドを実行する。
