@@ -22,5 +22,10 @@ RUN mv hrp2 /home/root/
 WORKDIR /home/root/hrp2/cfg
 RUN make
 RUN rm -rf /home/root/tmp
+
+ADD make_src.sh /home/root/hrp2/sdk/workspace 
+
 WORKDIR /home/root/hrp2/sdk/workspace
+RUN chmod 755 make_src.sh
+CMD /home/root/hrp2/sdk/workspace/make_src.sh
 
