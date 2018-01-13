@@ -1,0 +1,3 @@
+[submodule "sample"]
+	path = sample
+	url = https://github.com/korosuke613/ev3way_on_off_linetrace.git
