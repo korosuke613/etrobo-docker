@@ -43,7 +43,8 @@ $ docker run -v $PWD:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
 3行目の`$PWD`では、カレントディレクトリの絶対パスをDockerで読み込める形式に成型している。（[参考](http://vividcode.hatenablog.com/entry/mount-host-directory-as-data-volume-on-power-shell-with-pwd "PowerShell (Windows) で Docker コンテナにホストディレクトリをデータボリュームとしてマウントする際に pwd 相当のことをしたい")）
 
 #### Bash on Windows(BoW)またはWindows Subsystem for Linux(WSL)の場合
-WSL内のディレクトリは`-v`オプションで指定できないので、Windows上の絶対パスを指定する。([参考](https://qiita.com/gentaro/items/7dec88e663f59b472de6 "Docker for WindowsをWSLから使う時のVolumeの扱い方")
+WSL内のディレクトリは`-v`オプションで指定できないので、Windows上の絶対パスを指定する。([参考](https://qiita.com/gentaro/items/7dec88e663f59b472de6 "Docker for WindowsをWSLから使う時のVolumeの扱い方"))
+
 次の例は、`C:\Users\hoge\ETrobo-Docker\sample\src`を共有する場合である。
 ```bash
 $ git clone --recursive --depth=1 https://github.com/korosuke613/ETrobo-Docker.git
