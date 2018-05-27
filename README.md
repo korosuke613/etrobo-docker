@@ -31,7 +31,7 @@ $ docker run -v $PWD:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
 ```bash
 $ git clone --recursive --depth=1 https://github.com/korosuke613/ETrobo-Docker.git
 $ cd ETrobo-Docker/sample/src
-$ docker run -v $PWD:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
+$ docker run --rm -v $PWD:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
 ```
 
 #### PowerShellの場合
@@ -39,7 +39,7 @@ $ docker run -v $PWD:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
 > git clone --recursive --depth=1 https://github.com/korosuke613/ETrobo-Docker.git
 > cd ETrobo-Docker/sample/src
 > $PWD = "/$((pwd).Drive.Name.ToLowerInvariant())/$((pwd).Path.Replace('\', '/').Substring(3))"
-> docker run -v ${PWD}:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
+> docker run --rm -v ${PWD}:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
 ```
 3行目の`$PWD`では、カレントディレクトリの絶対パスをDockerで読み込める形式に成型している。（[参考](http://vividcode.hatenablog.com/entry/mount-host-directory-as-data-volume-on-power-shell-with-pwd "PowerShell (Windows) で Docker コンテナにホストディレクトリをデータボリュームとしてマウントする際に pwd 相当のことをしたい")）
 
@@ -50,6 +50,6 @@ WSL内のディレクトリは`-v`オプションで指定できないので、W
 ```bash
 $ git clone --recursive --depth=1 https://github.com/korosuke613/ETrobo-Docker.git
 $ cd ETrobo-Docker/sample/src
-$ docker run -v C:\\Users\\hoge\\ETrobo-Docker\\sample\\src:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
+$ docker run --rm -v C:\\Users\\hoge\\ETrobo-Docker\\sample\\src:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
 ```
 `\`はエスケープ文字であるため、`\\`というふうにエスケープする必要がある。
