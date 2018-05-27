@@ -8,11 +8,11 @@ RUN mkdir tmp
 WORKDIR /home/tmp
 
 # ToppersからMakefileをダウンロード、解凍
-RUN wget http://www.toppers.jp/download.cgi/ev3rt-beta7-release.zip
-RUN unzip ev3rt-beta7-release.zip
+RUN wget http://www.toppers.jp/download.cgi/ev3rt-beta7-1-release.zip
+RUN unzip ev3rt-beta7-1-release.zip
 
 # hrp2の解凍、移動
-RUN tar Jxvf ev3rt-beta7-release/hrp2.tar.xz
+RUN tar Jxvf ev3rt-beta7-1-release/hrp2.tar.xz
 RUN mv hrp2 /home/
 
 # cfgをmake
