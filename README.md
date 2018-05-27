@@ -6,6 +6,7 @@ TOPPERS/EV3RTのビルド環境をラッピングしたUbuntuベースのDocker 
 * OS : Ubuntu 16.04.3
 * Imageのサイズ : 約1.8GB
 * `macOS 10.13.2`, `Windows10 Pro 16299.192のPowerShellおよびBoW` にて動作確認済
+* TOPPERS/EV3RTのバージョン : [β7-1](http://dev.toppers.jp/trac_user/ev3pf/wiki/Download)
 
 ## 使用例
 `app.cfg`の存在するディレクトリ(`/some/src/`とする)に移動してから、次のコマンドを実行する。
