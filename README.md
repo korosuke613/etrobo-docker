@@ -12,7 +12,7 @@ TOPPERS/EV3RTのビルド環境をラッピングしたUbuntuベースのDocker 
 `app.cfg`の存在するディレクトリ(`/some/src/`とする)に移動してから、次のコマンドを実行する。
 
 ```
-$ docker run -v /some/src/:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
+$ docker run --rm -v /some/src/:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
 ```
 
 ビルドがうまく行った場合、`/some/src`に`app`というEV3RT向けの実行ファイルが生成されている。
@@ -21,7 +21,7 @@ $ docker run -v /some/src/:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docke
 
 ```
 $ cd /some/src/
-$ docker run -v $PWD:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker 
+$ docker run --rm -v $PWD:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker 
 ```
 
 ### 手っ取り早く動作確認をしたい場合
