@@ -20,6 +20,7 @@ RUN apt-get update && \
     wget \
     unzip \
     libboost-all-dev \
+    cmake \
     && apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
 # 作業用フォルダの作成
@@ -37,6 +38,19 @@ RUN wget http://www.toppers.jp/download.cgi/ev3rt-beta7-1-release.zip \
 # cfgをmake
 WORKDIR /home/hrp2/cfg
 RUN make
+
+# googletestの有効化
+WORKDIR /home/hrp2/sdk
+RUN git clone https://github.com/google/googletest
+WORKDIR googletest
+RUN mkdir build
+WORKDIR build
+RUN cmake .. && make
+ENV GTEST_ROOT /home/hrp2/sdk/googletest
+ENV GTEST_INCLUDEDIR $GTEST_ROOT/googletest/include 
+ENV GMOCK_INCLUDEDIR $GTESTROOT/googlemock/include 
+ENV GMOCK_LIBDIR $GTEST_ROOT/build/googlemock 
+ENV GTEST_LIBDIR $GTEST_ROOT/build/googlemock/gtest
 
 # make_src.shを使用可能に
 WORKDIR /home/hrp2/sdk/workspace
