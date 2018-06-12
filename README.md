@@ -23,7 +23,7 @@ docker run --rm -v /some/src/:/home/hrp2/sdk/workspace/src korosuke613/etrobo-do
 
 ```bash
 cd /some/src/
-docker run --rm -v $PWD:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker 
+docker run --rm -v $PWD:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
 ```
 
 ### 手っ取り早く動作確認をしたい場合
