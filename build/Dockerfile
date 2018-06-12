@@ -2,7 +2,7 @@
 FROM ubuntu
 
 # 作者の指定
-MAINTAINER Futa HIRAKOBA
+LABEL maintainer "Futa HIRAKOBA"
 
 # アップデート
 RUN apt-get update && apt-get upgrade -y && \
