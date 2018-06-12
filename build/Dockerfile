@@ -42,19 +42,30 @@ RUN make
 # googletestの有効化
 WORKDIR /home/hrp2/sdk
 RUN git clone https://github.com/google/googletest
-WORKDIR googletest
+WORKDIR /home/hrp2/sdk/googletest
 RUN mkdir build
-WORKDIR build
+WORKDIR /home/hrp2/sdk/googletest/build
 RUN cmake .. && make
-ENV GTEST_ROOT /home/hrp2/sdk/googletest
-ENV GTEST_INCLUDEDIR $GTEST_ROOT/googletest/include 
-ENV GMOCK_INCLUDEDIR $GTESTROOT/googlemock/include 
-ENV GMOCK_LIBDIR $GTEST_ROOT/build/googlemock 
-ENV GTEST_LIBDIR $GTEST_ROOT/build/googlemock/gtest
+#ENV GTEST_ROOT /home/hrp2/sdk/googletest
+#ENV GTEST_INCLUDEDIR $GTEST_ROOT/googletest/include 
+#ENV GMOCK_INCLUDEDIR $GTESTROOT/googlemock/include 
+#ENV GMOCK_LIBDIR $GTEST_ROOT/build/googlemock 
+#ENV GTEST_LIBDIR $GTEST_ROOT/build/googlemock/gtest
+WORKDIR /home/hrp2/sdk/googletest
+RUN mkdir /usr/local/lib/pkgconfig
+RUN cp -r googlemock/include/gmock /usr/local/include/gmock \
+    && cp -r googletest/include/gtest /usr/local/include/gtest \
+    && cp build/googlemock/*.a /usr/local/lib/ \
+    && cp build/googlemock/gtest/*.a /usr/lib/ \
+    && cp build/*.pc /usr/local/lib/pkgconfig/
 
 # make_src.shを使用可能に
 WORKDIR /home/hrp2/sdk/workspace
 # makeのラッパースクリプトを追加
 ADD make_src.sh /home/hrp2/sdk/workspace 
-RUN chmod 755 make_src.sh
-CMD /home/hrp2/sdk/workspace/make_src.sh
+RUN chmod 755 make_src.sh && mv make_src.sh /usr/local/bin/make_src
+
+ADD install.sh /home/hrp2/sdk/workspace 
+RUN chmod 755 install.sh && mv install.sh /usr/local/bin/gtest_start
+
+CMD make_src
