@@ -1,8 +1,8 @@
 #!/bin/sh
 
-cd src
+cd product
 mkdir build
 cd build
-cmake ..
+cmake -DCMAKE_BUILD_TYPE=Coverage ..
 cmake --build .
-ctest -VV
+make test_coverage

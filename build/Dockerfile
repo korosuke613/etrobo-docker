@@ -8,6 +8,9 @@ LABEL maintainer "Futa HIRAKOBA"
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
+# tzdataをノンインタラクティブに設定
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update && \
     apt-get install -y \
     git \
@@ -21,7 +24,13 @@ RUN apt-get update && \
     unzip \
     libboost-all-dev \
     cmake \
+    lcov \
+    python3-pip \
+    tzdata \
     && apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
+
+# タイムゾーンの変更
+RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 # 作業用フォルダの作成
 WORKDIR /home/
@@ -46,11 +55,6 @@ WORKDIR /home/hrp2/sdk/googletest
 RUN mkdir build
 WORKDIR /home/hrp2/sdk/googletest/build
 RUN cmake .. && make
-#ENV GTEST_ROOT /home/hrp2/sdk/googletest
-#ENV GTEST_INCLUDEDIR $GTEST_ROOT/googletest/include 
-#ENV GMOCK_INCLUDEDIR $GTESTROOT/googlemock/include 
-#ENV GMOCK_LIBDIR $GTEST_ROOT/build/googlemock 
-#ENV GTEST_LIBDIR $GTEST_ROOT/build/googlemock/gtest
 WORKDIR /home/hrp2/sdk/googletest
 RUN mkdir /usr/local/lib/pkgconfig
 RUN cp -r googlemock/include/gmock /usr/local/include/gmock \
@@ -65,7 +69,13 @@ WORKDIR /home/hrp2/sdk/workspace
 ADD make_src.sh /home/hrp2/sdk/workspace 
 RUN chmod 755 make_src.sh && mv make_src.sh /usr/local/bin/make_src
 
+# テスト実行スクリプト
 ADD install.sh /home/hrp2/sdk/workspace 
 RUN chmod 755 install.sh && mv install.sh /usr/local/bin/gtest_start
+
+# カバレッジ計測用ファイル
+RUN pip3 install gcovr
+ADD CodeCoverage.cmake /home/hrp2/sdk/workspace 
+ADD CMakeLists.txt /home/hrp2/sdk/workspace 
 
 CMD make_src
