@@ -8,9 +8,6 @@ LABEL maintainer "Futa HIRAKOBA"
 RUN apt-get update && apt-get upgrade -y && \
     apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
-# tzdataをノンインタラクティブに設定
-ENV DEBIAN_FRONTEND=noninteractive
-
 RUN apt-get update && \
     apt-get install -y \
     git \
@@ -26,11 +23,11 @@ RUN apt-get update && \
     cmake \
     lcov \
     python3-pip \
-    tzdata \
+    language-pack-ja-base language-pack-ja \
     && apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
-# タイムゾーンの変更
-RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+# localeの変更
+ENV LANG=ja_JP.UTF-8
 
 # 作業用フォルダの作成
 WORKDIR /home/
