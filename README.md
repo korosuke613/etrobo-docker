@@ -14,7 +14,7 @@ TOPPERS/EV3RTのビルド環境をラッピングしたUbuntuベースのDocker 
 `app.cfg`の存在するディレクトリ(`/some/src/`とする)に移動してから、次のコマンドを実行する。
 
 ```bash
-docker run --rm -v /some/src/:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
+docker run --rm -v /some/src/:/home/hrp2/sdk/workspace/product korosuke613/etrobo-docker
 ```
 
 ビルドがうまく行った場合、`/some/src`に`app`というEV3RT向けの実行ファイルが生成されている。
@@ -23,7 +23,7 @@ docker run --rm -v /some/src/:/home/hrp2/sdk/workspace/src korosuke613/etrobo-do
 
 ```bash
 cd /some/src/
-docker run --rm -v $PWD:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
+docker run --rm -v $PWD:/home/hrp2/sdk/workspace/product korosuke613/etrobo-docker
 ```
 
 ### 手っ取り早く動作確認をしたい場合
@@ -35,7 +35,7 @@ docker run --rm -v $PWD:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
 ```bash
 git clone --recursive --depth=1 https://github.com/korosuke613/ETrobo-Docker.git
 cd ETrobo-Docker/sample/src
-docker run --rm -v $PWD:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
+docker run --rm -v $PWD:/home/hrp2/sdk/workspace/product korosuke613/etrobo-docker
 ```
 
 #### PowerShellの場合
@@ -43,11 +43,8 @@ docker run --rm -v $PWD:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
 ```PowerShell
 git clone --recursive --depth=1 https://github.com/korosuke613/ETrobo-Docker.git
 cd ETrobo-Docker/sample/src
-$PWD = "/$((pwd).Drive.Name.ToLowerInvariant())/$((pwd).Path.Replace('\', '/').Substring(3))"
-> docker run --rm -v ${PWD}:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
+> docker run --rm -v ${PWD}:/home/hrp2/sdk/workspace/product korosuke613/etrobo-docker
 ```
-
-3行目の`$PWD`では、カレントディレクトリの絶対パスをDockerで読み込める形式に成型している。（[参考](http://vividcode.hatenablog.com/entry/mount-host-directory-as-data-volume-on-power-shell-with-pwd "PowerShell (Windows) で Docker コンテナにホストディレクトリをデータボリュームとしてマウントする際に pwd 相当のことをしたい")）
 
 #### Bash on Windows(BoW)またはWindows Subsystem for Linux(WSL)の場合
 
@@ -58,7 +55,7 @@ WSL内のディレクトリは`-v`オプションで指定できないので、W
 ```bash
 git clone --recursive --depth=1 https://github.com/korosuke613/ETrobo-Docker.git
 cd ETrobo-Docker/sample/src
-docker run --rm -v C:\\Users\\hoge\\ETrobo-Docker\\sample\\src:/home/hrp2/sdk/workspace/src korosuke613/etrobo-docker
+docker run --rm -v C:\\Users\\hoge\\ETrobo-Docker\\sample\\src:/home/hrp2/sdk/workspace/product korosuke613/etrobo-docker
 ```
 
 `\`はエスケープ文字であるため、`\\`というふうにエスケープする必要がある。
