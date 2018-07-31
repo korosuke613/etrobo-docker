@@ -1,2 +1,4 @@
-./makeRight.sh
-./makeLeft.sh
+#!/bin/sh
+
+makeRight
+makeLeft
