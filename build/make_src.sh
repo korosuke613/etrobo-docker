@@ -1,4 +1,4 @@
 #!/bin/sh
 
-make app=src
-cp app src/app
+make app=product
+cp app product/app

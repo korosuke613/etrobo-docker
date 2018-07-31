@@ -1,4 +1,4 @@
 #!/bin/sh
 
-make app=src side=left
-mv app src/app_left
+make app=product side=left
+mv app product/app_left
