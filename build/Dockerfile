@@ -66,6 +66,12 @@ WORKDIR /home/hrp2/sdk/workspace
 # makeのラッパースクリプトを追加
 ADD make_src.sh /home/hrp2/sdk/workspace 
 RUN chmod 755 make_src.sh && mv make_src.sh /usr/local/bin/make_src
+ADD makeLeft.sh /home/hrp2/sdk/workspace 
+RUN chmod 755 makeLeft.sh && mv makeLeft.sh /usr/local/bin/makeLeft
+ADD makeRight.sh /home/hrp2/sdk/workspace 
+RUN chmod 755 makeRight.sh && mv makeRight.sh /usr/local/bin/makeRight
+ADD makeSpecial.sh /home/hrp2/sdk/workspace 
+RUN chmod 755 makeSpecial.sh && mv makeSpecial.sh /usr/local/bin/makeSpecial
 
 # テスト実行スクリプト
 ADD install.sh /home/hrp2/sdk/workspace 
