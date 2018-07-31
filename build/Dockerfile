@@ -24,6 +24,7 @@ RUN apt-get update && \
     lcov \
     python3-pip \
     language-pack-ja-base language-pack-ja \
+    clang-format \
     && apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
 
 # localeの変更
