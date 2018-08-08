@@ -36,9 +36,9 @@ RUN mkdir tmp
 WORKDIR /home/tmp
 
 # ToppersからMakefileをダウンロード、解凍
-RUN wget http://www.toppers.jp/download.cgi/ev3rt-beta7-1-release.zip \
-    && unzip ev3rt-beta7-1-release.zip \
-    && tar Jxvf ev3rt-beta7-1-release/hrp2.tar.xz \
+RUN wget http://www.toppers.jp/download.cgi/ev3rt-beta7-2-release.zip \
+    && unzip ev3rt-beta7-2-release.zip \
+    && tar Jxvf ev3rt-beta7-2-release/hrp2.tar.xz \
     && mv hrp2 /home/ \
     && rm -rf ./*
 
