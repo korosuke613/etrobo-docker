@@ -79,7 +79,8 @@ RUN pip3 install gcovr
 COPY CodeCoverage.cmake /home/hrp2/sdk/workspace 
 COPY CMakeLists.txt /home/hrp2/sdk/workspace 
 
-USER daemon
+RUN useradd etrobo
+USER etrobo
 
 
 CMD make_src
