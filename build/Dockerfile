@@ -72,15 +72,16 @@ RUN chmod 755 make_src.sh && mv make_src.sh /usr/local/bin/make_src \
     && chmod 755 makeSpecial.sh && mv makeSpecial.sh /usr/local/bin/makeSpecial \
     && chmod 755 install.sh && mv install.sh /usr/local/bin/gtest_start
 
-RUN chown -R daemon:daemon /home/hrp2/
-
 # カバレッジ計測用ファイル
 RUN pip3 install gcovr
 COPY CodeCoverage.cmake /home/hrp2/sdk/workspace 
 COPY CMakeLists.txt /home/hrp2/sdk/workspace 
 
-RUN useradd etrobo
-USER etrobo
+RUN mkdir /home/etrobo \
+    && useradd -d /home/etrobo etrobo \
+    && chown -R etrobo:etrobo /home/hrp2/ \
+    && chown -R etrobo:etrobo /home/etrobo/
+    USER etrobo
 
 
 CMD make_src
