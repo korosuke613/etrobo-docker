@@ -57,9 +57,8 @@ WORKDIR /home/hrp2/sdk/googletest
 RUN mkdir /usr/local/lib/pkgconfig
 RUN cp -r googlemock/include/gmock /usr/local/include/gmock \
     && cp -r googletest/include/gtest /usr/local/include/gtest \
-    && cp build/googlemock/*.a /usr/local/lib/ \
-    && cp build/googlemock/gtest/*.a /usr/lib/ \
-    && cp build/*.pc /usr/local/lib/pkgconfig/
+    && cp build/lib/*.a /usr/local/lib/ \
+    && cp build/googletest/generated/*.pc /usr/local/lib/pkgconfig/
 
 # make_src.shを使用可能に
 WORKDIR /home/hrp2/sdk/workspace
