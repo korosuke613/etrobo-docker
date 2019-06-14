@@ -1,14 +1,11 @@
 # FROM でベースとなるイメージを指定
-FROM ubuntu
+FROM ubuntu:18.04
 
 # 作者の指定
 LABEL maintainer "Futa HIRAKOBA"
 
-# アップデート
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get clean && rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/*
-
-RUN apt-get update && \
+RUN set -x && \
+    apt-get update && \
     apt-get install -y \
     git \
     xz-utils \
@@ -48,7 +45,7 @@ RUN make
 
 # googletestの有効化
 WORKDIR /home/hrp2/sdk
-RUN git clone https://github.com/google/googletest
+RUN git clone --depth=1 https://github.com/google/googletest
 WORKDIR /home/hrp2/sdk/googletest
 RUN mkdir build
 WORKDIR /home/hrp2/sdk/googletest/build
@@ -57,29 +54,32 @@ WORKDIR /home/hrp2/sdk/googletest
 RUN mkdir /usr/local/lib/pkgconfig
 RUN cp -r googlemock/include/gmock /usr/local/include/gmock \
     && cp -r googletest/include/gtest /usr/local/include/gtest \
-    && cp build/googlemock/*.a /usr/local/lib/ \
-    && cp build/googlemock/gtest/*.a /usr/lib/ \
-    && cp build/*.pc /usr/local/lib/pkgconfig/
+    && cp build/lib/*.a /usr/local/lib/ \
+    && cp build/googletest/generated/*.pc /usr/local/lib/pkgconfig/
 
 # make_src.shを使用可能に
 WORKDIR /home/hrp2/sdk/workspace
 # makeのラッパースクリプトを追加
-ADD make_src.sh /home/hrp2/sdk/workspace 
-RUN chmod 755 make_src.sh && mv make_src.sh /usr/local/bin/make_src
-ADD makeLeft.sh /home/hrp2/sdk/workspace 
-RUN chmod 755 makeLeft.sh && mv makeLeft.sh /usr/local/bin/makeLeft
-ADD makeRight.sh /home/hrp2/sdk/workspace 
-RUN chmod 755 makeRight.sh && mv makeRight.sh /usr/local/bin/makeRight
-ADD makeSpecial.sh /home/hrp2/sdk/workspace 
-RUN chmod 755 makeSpecial.sh && mv makeSpecial.sh /usr/local/bin/makeSpecial
+COPY make_src.sh /home/hrp2/sdk/workspace 
+COPY makeLeft.sh /home/hrp2/sdk/workspace 
+COPY makeRight.sh /home/hrp2/sdk/workspace 
+COPY makeSpecial.sh /home/hrp2/sdk/workspace 
+COPY install.sh /home/hrp2/sdk/workspace 
 
-# テスト実行スクリプト
-ADD install.sh /home/hrp2/sdk/workspace 
-RUN chmod 755 install.sh && mv install.sh /usr/local/bin/gtest_start
+RUN chmod 755 make_src.sh && mv make_src.sh /usr/local/bin/make_src \
+    && chmod 755 makeLeft.sh && mv makeLeft.sh /usr/local/bin/makeLeft \
+    && chmod 755 makeRight.sh && mv makeRight.sh /usr/local/bin/makeRight \
+    && chmod 755 makeSpecial.sh && mv makeSpecial.sh /usr/local/bin/makeSpecial \
+    && chmod 755 install.sh && mv install.sh /usr/local/bin/gtest_start
+
+RUN chown -R daemon:daemon /home/hrp2/
 
 # カバレッジ計測用ファイル
 RUN pip3 install gcovr
-ADD CodeCoverage.cmake /home/hrp2/sdk/workspace 
-ADD CMakeLists.txt /home/hrp2/sdk/workspace 
+COPY CodeCoverage.cmake /home/hrp2/sdk/workspace 
+COPY CMakeLists.txt /home/hrp2/sdk/workspace 
+
+USER daemon
+
 
 CMD make_src
