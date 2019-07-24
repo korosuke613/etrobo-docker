@@ -4,10 +4,10 @@
 
 TOPPERS/EV3RTのビルド環境をラッピングしたUbuntuベースのDocker Image
 
-* OS : Ubuntu 16.04.3
-* Imageのサイズ : 約1.8GB
-* `macOS 10.13.5`, `Windows10 Pro 16299.192のPowerShellおよびBoW` にて動作確認済
-* TOPPERS/EV3RTのバージョン : [β7-1](http://dev.toppers.jp/trac_user/ev3pf/wiki/Download)
+* OS : Ubuntu 18.04.2 LTS
+* Imageのサイズ : 約2GB
+* `macOS 10.14.5`, `Windows10 Pro 16299.192のPowerShellおよびBoW` にて動作確認済
+* TOPPERS/EV3RTのバージョン : [β7-3](http://dev.toppers.jp/trac_user/ev3pf/wiki/Download)
 
 ## 使用例
 
