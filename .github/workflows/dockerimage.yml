@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@master
     - name: install dockle
       run: VERSION=$(curl --silent "https://api.github.com/repos/goodwithtech/dockle/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/') && curl -L -o dockle.deb https://github.com/goodwithtech/dockle/releases/download/v${VERSION}/dockle_${VERSION}_Linux-64bit.deb
-           dpkg -i dockle.deb && rm dockle.deb
+           && dpkg -i dockle.deb && rm dockle.deb
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag etrobo-docker:$(date +%s)
     - name: dockle
