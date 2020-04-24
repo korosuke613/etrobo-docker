@@ -1,5 +1,5 @@
 # FROM でベースとなるイメージを指定
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 # 作者の指定
 LABEL maintainer "Futa HIRAKOBA"
